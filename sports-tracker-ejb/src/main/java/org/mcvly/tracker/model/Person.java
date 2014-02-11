@@ -1,12 +1,17 @@
 package org.mcvly.tracker.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -32,6 +37,10 @@ public class Person implements Serializable {
 
     private Integer height;
 
+    @ElementCollection // one-to-many with embeddable
+    @CollectionTable(name = "person_stats", joinColumns = @JoinColumn(name = "person_id"))
+    private List<PersonStats> stats = new ArrayList<>();
+
     public Integer getId() {
         return id;
     }
@@ -53,7 +62,7 @@ public class Person implements Serializable {
     }
 
     public void setBirth(Date birth) {
-        this.birth = birth;
+        this.birth = new Date(birth.getTime());
     }
 
     public Integer getHeight() {
@@ -62,5 +71,18 @@ public class Person implements Serializable {
 
     public void setHeight(Integer height) {
         this.height = height;
+    }
+
+    public List<PersonStats> getStats() {
+        return stats;
+    }
+
+    public void setStats(List<PersonStats> stats) {
+        this.stats = stats;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" + "id=" + id + ", name='" + name + '\'' + ", birth=" + birth + ", height=" + height + ", stats=" + stats + '}';
     }
 }
