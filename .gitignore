@@ -1,3 +1,6 @@
 .idea/
 target/
 sports-tracker.iml
+sports-tracker-ear/sports-tracker-ear.iml
+sports-tracker-ejb/sports-tracker-ejb.iml
+sports-tracker-web/sports-tracker-web.iml
