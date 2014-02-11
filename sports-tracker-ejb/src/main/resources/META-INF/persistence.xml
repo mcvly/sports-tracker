@@ -5,13 +5,20 @@
         http://java.sun.com/xml/ns/persistence
         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
    <persistence-unit name="primary">
-      <!-- If you are running in a production environment, add a managed 
-         data source, the example data source is just for proofs of concept! -->
-      <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
-      <properties>
-         <!-- Properties for Hibernate -->
-         <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-         <property name="hibernate.show_sql" value="false" />
-      </properties>
+       <provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+       <!-- entities -->
+       <class>org.mcvly.tracker.model.Person</class>
+       <exclude-unlisted-classes/>
+       <properties>
+           <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/sports_tracker"/>
+           <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+           <property name="hibernate.connection.username" value="root"/>
+           <property name="hibernate.connection.password" value="obroot"/>
+           <property name="hibernate.archive.autodetection" value="class"/>
+           <property name="hibernate.show_sql" value="true"/>
+           <property name="hibernate.format_sql" value="true"/>
+           <property name="hibernate.hbm2ddl.auto" value="create"/>
+       </properties>
    </persistence-unit>
 </persistence>

@@ -52,6 +52,28 @@
          <scope>provided</scope>
       </dependency>
 
+       <dependency>
+           <groupId>org.hibernate</groupId>
+           <artifactId>hibernate-core</artifactId>
+           <version>4.3.0.Final</version>
+       </dependency>
+       <dependency>
+           <groupId>org.hibernate</groupId>
+           <artifactId>hibernate-entitymanager</artifactId>
+           <version>4.3.0.Final</version>
+       </dependency>
+
+       <dependency>
+           <groupId>mysql</groupId>
+           <artifactId>mysql-connector-java</artifactId>
+           <version>5.1.26</version>
+       </dependency>
+
+       <dependency>
+           <groupId>org.slf4j</groupId>
+           <artifactId>slf4j-api</artifactId>
+           <version>1.7.6</version>
+       </dependency>
 
       <!-- Test scope dependencies -->
       <dependency>
@@ -143,9 +165,9 @@
             </pluginRepository>
          </pluginRepositories>
 
-         <!-- An optional Arquillian testing profile that executes tests 
+         <!-- An optional Arquillian testing profile that executes tests
             in your JBoss AS instance -->
-         <!-- This profile will start a new JBoss AS instance, and execute 
+         <!-- This profile will start a new JBoss AS instance, and execute
             the test, shutting it down when done -->
          <!-- Run with: mvn clean test -Parq-jbossas-managed -->
          <id>arq-jbossas-managed</id>
@@ -195,7 +217,7 @@
             </pluginRepository>
          </pluginRepositories>
 
-         <!-- An optional Arquillian testing profile that executes tests 
+         <!-- An optional Arquillian testing profile that executes tests
             in a remote JBoss AS instance -->
          <!-- Run with: mvn clean test -Parq-jbossas-remote -->
          <id>arq-jbossas-remote</id>
