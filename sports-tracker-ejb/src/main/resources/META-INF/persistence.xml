@@ -8,8 +8,6 @@
        <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
        <!-- entities -->
-       <class>org.mcvly.tracker.model.Person</class>
-       <exclude-unlisted-classes/>
        <properties>
            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/sports_tracker"/>
            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
