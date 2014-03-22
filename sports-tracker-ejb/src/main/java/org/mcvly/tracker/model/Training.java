@@ -1,0 +1,129 @@
+package org.mcvly.tracker.model;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * @author mcvly
+ * @since 21.03.14
+ */
+@Entity
+@Table(name = "training")
+public class Training implements Serializable {
+
+    private static final long serialVersionUID = -4720839718136077131L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private TrainingType type;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person trainee;
+
+    @Column(name = "training_start")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date trainingStart;
+
+    @Column(name = "training_stop")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date trainingStop;
+
+    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
+    private List<Exercise> exercises;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public TrainingType getType() {
+        return type;
+    }
+
+    public void setType(TrainingType type) {
+        this.type = type;
+    }
+
+    public Person getTrainee() {
+        return trainee;
+    }
+
+    public void setTrainee(Person trainee) {
+        this.trainee = trainee;
+    }
+
+    public Date getTrainingStart() {
+        return trainingStart;
+    }
+
+    public void setTrainingStart(Date trainingStart) {
+        this.trainingStart = trainingStart;
+    }
+
+    public Date getTrainingStop() {
+        return trainingStop;
+    }
+
+    public void setTrainingStop(Date trainingStop) {
+        this.trainingStop = trainingStop;
+    }
+
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Training training = (Training) o;
+
+        if (exercises != null ? !exercises.equals(training.exercises) : training.exercises != null) return false;
+        if (id != null ? !id.equals(training.id) : training.id != null) return false;
+        if (trainee != null ? !trainee.equals(training.trainee) : training.trainee != null) return false;
+        if (trainingStart != null ? !trainingStart.equals(training.trainingStart) : training.trainingStart != null)
+            return false;
+        if (trainingStop != null ? !trainingStop.equals(training.trainingStop) : training.trainingStop != null)
+            return false;
+        if (type != training.type) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (trainee != null ? trainee.hashCode() : 0);
+        result = 31 * result + (trainingStart != null ? trainingStart.hashCode() : 0);
+        result = 31 * result + (trainingStop != null ? trainingStop.hashCode() : 0);
+        result = 31 * result + (exercises != null ? exercises.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Training{" +
+                "id=" + id +
+                ", type=" + type +
+                ", trainee=" + trainee +
+                ", trainingStart=" + trainingStart +
+                ", trainingStop=" + trainingStop +
+                ", exercises=" + exercises +
+                '}';
+    }
+}

@@ -34,6 +34,9 @@ public class Person implements Serializable {
     @CollectionTable(name = "person_stats", joinColumns = @JoinColumn(name = "person_id"))
     private List<PersonStats> stats = new ArrayList<>();
 
+    @OneToMany(mappedBy = "trainee")
+    private List<Training> trainings = new ArrayList<>();
+
     public Integer getId() {
         return id;
     }
@@ -74,8 +77,23 @@ public class Person implements Serializable {
         this.stats = stats;
     }
 
+    public List<Training> getTrainings() {
+        return trainings;
+    }
+
+    public void addTraining(Training training) {
+        this.trainings.add(training);
+    }
+
     @Override
     public String toString() {
-        return "Person{" + "id=" + id + ", name='" + name + '\'' + ", birth=" + birth + ", height=" + height + ", stats=" + stats + '}';
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", birth=" + birth +
+                ", height=" + height +
+                ", stats=" + stats +
+                ", trainings=" + trainings +
+                '}';
     }
 }

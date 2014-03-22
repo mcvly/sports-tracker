@@ -1,6 +1,5 @@
 package org.mcvly.tracker.model;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,11 +23,9 @@ public class TrainingSubType implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Basic
     @Enumerated(EnumType.STRING)
     private TrainingType type;
 
-    @Basic
     private String name;
 
     public Integer getId() {
