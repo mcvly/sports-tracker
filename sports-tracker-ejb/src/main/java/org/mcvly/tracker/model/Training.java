@@ -19,7 +19,8 @@ public class Training implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private TrainingType type;
 
     @ManyToOne

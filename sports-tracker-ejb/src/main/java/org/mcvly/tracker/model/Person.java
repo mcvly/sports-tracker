@@ -23,6 +23,7 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false, length = 64)
     private String name;
 
     @Temporal(TemporalType.DATE)

@@ -1,11 +1,10 @@
 package org.mcvly.tracker.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -20,12 +19,13 @@ public class TrainingSubType implements Serializable {
     private static final long serialVersionUID = -8205624601975179540L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private TrainingType type;
 
+    @Column(nullable = false, length = 64)
     private String name;
 
     public Integer getId() {

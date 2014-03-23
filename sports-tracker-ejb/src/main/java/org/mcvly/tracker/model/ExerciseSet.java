@@ -10,7 +10,7 @@ import java.time.Duration;
  * @since 21.03.14
  */
 @Embeddable
-public class Set implements Serializable {
+public class ExerciseSet implements Serializable {
 
     private static final long serialVersionUID = -7657444066197510292L;
 
@@ -19,26 +19,25 @@ public class Set implements Serializable {
     @Column(name = "duration")
     private String durationString;
 
-    private Float result;
+    private Double result;
 
     private Integer reps;
 
     private String note;
 
     public Duration getDuration() {
-        return duration;
+        return Duration.parse(durationString);
     }
 
     public void setDurationString(String durationString) {
         this.durationString = durationString;
-        this.duration = Duration.parse(durationString);
     }
 
-    public Float getResult() {
+    public Double getResult() {
         return result;
     }
 
-    public void setResult(Float result) {
+    public void setResult(Double result) {
         this.result = result;
     }
 
@@ -63,14 +62,14 @@ public class Set implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Set set = (Set) o;
+        ExerciseSet exerciseSet = (ExerciseSet) o;
 
-        if (duration != null ? !duration.equals(set.duration) : set.duration != null) return false;
-        if (durationString != null ? !durationString.equals(set.durationString) : set.durationString != null)
+        if (duration != null ? !duration.equals(exerciseSet.duration) : exerciseSet.duration != null) return false;
+        if (durationString != null ? !durationString.equals(exerciseSet.durationString) : exerciseSet.durationString != null)
             return false;
-        if (note != null ? !note.equals(set.note) : set.note != null) return false;
-        if (reps != null ? !reps.equals(set.reps) : set.reps != null) return false;
-        if (result != null ? !result.equals(set.result) : set.result != null) return false;
+        if (note != null ? !note.equals(exerciseSet.note) : exerciseSet.note != null) return false;
+        if (reps != null ? !reps.equals(exerciseSet.reps) : exerciseSet.reps != null) return false;
+        if (result != null ? !result.equals(exerciseSet.result) : exerciseSet.result != null) return false;
 
         return true;
     }
@@ -87,7 +86,7 @@ public class Set implements Serializable {
 
     @Override
     public String toString() {
-        return "Set{" +
+        return "ExerciseSet{" +
                 "duration=" + duration +
                 ", result=" + result +
                 ", reps=" + reps +

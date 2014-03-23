@@ -3,6 +3,7 @@ package org.mcvly.tracker.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
@@ -14,8 +15,10 @@ public class PersonStats implements Serializable {
 
     private static final long serialVersionUID = -3600120141713936957L;
 
+    @Column(nullable = false)
     private Date measureDate;
 
+    @Column(nullable = false)
     private Double weight;
 
     public Date getMeasureDate() {

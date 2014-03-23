@@ -16,9 +16,9 @@ import javax.persistence.spi.PersistenceProvider;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.mcvly.tracker.model.Activity;
 import org.mcvly.tracker.model.Exercise;
+import org.mcvly.tracker.model.ExerciseSet;
 import org.mcvly.tracker.model.Person;
 import org.mcvly.tracker.model.PersonStats;
-import org.mcvly.tracker.model.Set;
 import org.mcvly.tracker.model.Training;
 import org.mcvly.tracker.model.TrainingSubType;
 import org.mcvly.tracker.model.TrainingType;
@@ -52,28 +52,6 @@ public class ModelTest {
         entityManagerFactory.close();
     }
 
-    private static void testActivity(EntityManager em) {
-        em.getTransaction().begin();
-
-        TrainingSubType subType = new TrainingSubType();
-        subType.setName("грудь");
-        subType.setType(TrainingType.GYM);
-
-        Activity activity = new Activity();
-        activity.setType(TrainingType.GYM);
-        activity.setSubType(subType);
-        activity.setName("Гантели в стороны");
-        activity.setDescription("---");
-
-        em.persist(subType);
-        em.persist(activity);
-
-        em.getTransaction().commit();
-        Activity p1 = em.find(Activity.class, activity.getId());
-        System.out.println(p1);
-
-    }
-
     private static void testPerson(EntityManager em) {
         em.getTransaction().begin();
 
@@ -98,17 +76,26 @@ public class ModelTest {
 
         em.getTransaction().begin();
 
+        TrainingType gym = new TrainingType();
+        gym.setId(1);
+        gym.setCode("GYM");
+        gym.setName("Тренажерка");
+
+        em.persist(gym);
+
         TrainingSubType subType = new TrainingSubType();
+        subType.setId(1);
         subType.setName("грудь");
-        subType.setType(TrainingType.GYM);
+        subType.setType(gym);
+
+        em.persist(subType);
 
         Activity activity = new Activity();
-        activity.setType(TrainingType.GYM);
+        activity.setType(gym);
         activity.setSubType(subType);
         activity.setName("Гантели в стороны");
         activity.setDescription("---");
 
-        em.persist(subType);
         em.persist(activity);
 
         em.getTransaction().commit();
@@ -120,7 +107,7 @@ public class ModelTest {
         System.out.println(p1);
 
         Training last = new Training();
-        last.setType(TrainingType.GYM);
+        last.setType(gym);
         last.setTrainee(p1);
         last.setTrainingStart(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
         last.setTrainingStop(Date.from(LocalDateTime.now().plusMinutes(75).toInstant(ZoneOffset.UTC)));
@@ -129,18 +116,18 @@ public class ModelTest {
         Exercise ex1 = new Exercise();
         ex1.setActivity(a1);
         ex1.setTraining(last);
-        Set mySet = new Set();
-        mySet.setReps(6);
-        mySet.setResult(65.6F);
-        mySet.setNote("note");
-        mySet.setDurationString("PT1M");
-        ex1.addSet(mySet);
-        Set mySet2 = new Set();
-        mySet2.setReps(5);
-        mySet2.setResult(65.6F);
-        mySet2.setNote("note1");
-        mySet2.setDurationString("PT1M1s");
-        ex1.addSet(mySet2);
+        ExerciseSet myExerciseSet = new ExerciseSet();
+        myExerciseSet.setReps(6);
+        myExerciseSet.setResult(65.6);
+        myExerciseSet.setNote("note");
+        myExerciseSet.setDurationString("PT1M");
+        ex1.addSet(myExerciseSet);
+        ExerciseSet myExerciseSet2 = new ExerciseSet();
+        myExerciseSet2.setReps(5);
+        myExerciseSet2.setResult(65.6);
+        myExerciseSet2.setNote("note1");
+        myExerciseSet2.setDurationString("PT1M1s");
+        ex1.addSet(myExerciseSet2);
         exercises.add(ex1);
 
         last.setExercises(exercises);

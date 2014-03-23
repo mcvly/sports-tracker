@@ -36,8 +36,8 @@ public class Exercise implements Serializable {
     private Activity activity;
 
     @ElementCollection // one-to-many with embeddable
-    @CollectionTable(name = "exercise_sets", joinColumns = @JoinColumn(name = "exercise_id"))
-    private List<Set> sets = new ArrayList<>();
+    @CollectionTable(name = "exercise_set", joinColumns = @JoinColumn(name = "exercise_id"))
+    private List<ExerciseSet> exerciseSets = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -63,16 +63,16 @@ public class Exercise implements Serializable {
         this.activity = activity;
     }
 
-    public List<Set> getSets() {
-        return sets;
+    public List<ExerciseSet> getExerciseSets() {
+        return exerciseSets;
     }
 
-    public void setSets(List<Set> sets) {
-        this.sets = sets;
+    public void setExerciseSets(List<ExerciseSet> exerciseSets) {
+        this.exerciseSets = exerciseSets;
     }
 
-    public void addSet(Set set) {
-        this.sets.add(set);
+    public void addSet(ExerciseSet exerciseSet) {
+        this.exerciseSets.add(exerciseSet);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Exercise implements Serializable {
 
         if (activity != null ? !activity.equals(exercise.activity) : exercise.activity != null) return false;
         if (id != null ? !id.equals(exercise.id) : exercise.id != null) return false;
-        if (sets != null ? !sets.equals(exercise.sets) : exercise.sets != null) return false;
+        if (exerciseSets != null ? !exerciseSets.equals(exercise.exerciseSets) : exercise.exerciseSets != null) return false;
         if (training != null ? !training.equals(exercise.training) : exercise.training != null) return false;
 
         return true;
@@ -95,7 +95,7 @@ public class Exercise implements Serializable {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (training != null ? training.hashCode() : 0);
         result = 31 * result + (activity != null ? activity.hashCode() : 0);
-        result = 31 * result + (sets != null ? sets.hashCode() : 0);
+        result = 31 * result + (exerciseSets != null ? exerciseSets.hashCode() : 0);
         return result;
     }
 
@@ -104,7 +104,7 @@ public class Exercise implements Serializable {
         return "Exercise{" +
                 "id=" + id +
                 ", activity=" + activity +
-                ", sets=" + sets +
+                ", exerciseSets=" + exerciseSets +
                 '}';
     }
 }

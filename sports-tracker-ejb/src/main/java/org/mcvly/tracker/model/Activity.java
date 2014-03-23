@@ -17,18 +17,18 @@ public class Activity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Basic
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private TrainingType type;
 
     @ManyToOne
     @JoinColumn(name = "sub_type_id")
     private TrainingSubType subType;
 
-    @Basic
+    @Column(nullable = false, length = 32)
     private String name;
 
-    @Basic
+    @Column(length = 2048)
     private String description;
 
     public Integer getId() {
