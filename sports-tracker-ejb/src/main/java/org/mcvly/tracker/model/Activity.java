@@ -25,7 +25,7 @@ public class Activity implements Serializable {
     @JoinColumn(name = "sub_type_id")
     private TrainingSubType subType;
 
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false, length = 64)
     private String name;
 
     @Column(length = 2048)

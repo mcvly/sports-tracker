@@ -1,0 +1,3 @@
+training_type
+training_sub_type
+activity

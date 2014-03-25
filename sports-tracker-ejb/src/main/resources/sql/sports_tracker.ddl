@@ -1,7 +1,7 @@
 CREATE TABLE activity
 (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(32) NOT NULL,
+    name VARCHAR(64) NOT NULL,
     type_id INT,
     sub_type_id INT,
     description VARCHAR(2048)
