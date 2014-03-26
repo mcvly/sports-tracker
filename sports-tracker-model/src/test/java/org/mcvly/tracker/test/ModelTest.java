@@ -1,5 +1,22 @@
 package org.mcvly.tracker.test;
 
+import static org.junit.Assert.assertEquals;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
@@ -21,23 +38,6 @@ import org.mcvly.tracker.model.ExerciseSet;
 import org.mcvly.tracker.model.Person;
 import org.mcvly.tracker.model.PersonStats;
 import org.mcvly.tracker.model.Training;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.sql.ResultSet;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * @author <a href="mailto:RMalyona@luxoft.com">Ruslan Malyona</a>
@@ -93,7 +93,7 @@ public class ModelTest {
 
     private IDataSet getDataSet() throws URISyntaxException, DataSetException {
         return new CompositeDataSet(
-//                new CsvDataSet(new File(ClassLoader.getSystemResource("sql").toURI())),
+                new CsvDataSet(new File(ClassLoader.getSystemResource("sql").toURI())),
                 new FlatXmlDataSetBuilder().build(ClassLoader.getSystemResourceAsStream("initDataSet.xml"))
         );
     }
@@ -105,12 +105,11 @@ public class ModelTest {
 
         entityManager.getTransaction().begin();
         p1 = entityManager.find(Person.class, 1);
-        Exercise e1 = entityManager.find(Exercise.class, 1L);
-        System.out.println(e1);
+        System.out.println(p1);
         entityManager.getTransaction().commit();
 
-//        checkStats(p1);
-//        checkTrainings(p1);
+        checkStats(p1);
+        checkTrainings(p1);
 
     }
 
