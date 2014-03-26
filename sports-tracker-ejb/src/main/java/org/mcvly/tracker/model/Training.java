@@ -84,6 +84,9 @@ public class Training implements Serializable {
 
     public void setExercises(List<Exercise> exercises) {
         this.exercises = exercises;
+        for (Exercise exercise : exercises) {
+            exercise.setTraining(this);
+        }
     }
 
     @Override
@@ -121,7 +124,7 @@ public class Training implements Serializable {
         return "Training{" +
                 "id=" + id +
                 ", type=" + type +
-                ", trainee=" + trainee +
+                ", trainee=" + trainee.getName() +
                 ", trainingStart=" + trainingStart +
                 ", trainingStop=" + trainingStop +
                 ", exercises=" + exercises +

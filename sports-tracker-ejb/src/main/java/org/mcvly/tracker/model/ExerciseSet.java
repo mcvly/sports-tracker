@@ -14,10 +14,8 @@ public class ExerciseSet implements Serializable {
 
     private static final long serialVersionUID = -7657444066197510292L;
 
-    private transient Duration duration; //TODO: migrate to jpa annotation when it appears
-
     @Column(name = "duration")
-    private String durationString;
+    private String duration;
 
     private Double result;
 
@@ -26,11 +24,11 @@ public class ExerciseSet implements Serializable {
     private String note;
 
     public Duration getDuration() {
-        return Duration.parse(durationString);
+        return Duration.parse(duration);
     }
 
-    public void setDurationString(String durationString) {
-        this.durationString = durationString;
+    public void setDuration(String durationString) {
+        this.duration = durationString;
     }
 
     public Double getResult() {
@@ -65,7 +63,7 @@ public class ExerciseSet implements Serializable {
         ExerciseSet exerciseSet = (ExerciseSet) o;
 
         if (duration != null ? !duration.equals(exerciseSet.duration) : exerciseSet.duration != null) return false;
-        if (durationString != null ? !durationString.equals(exerciseSet.durationString) : exerciseSet.durationString != null)
+        if (duration != null ? !duration.equals(exerciseSet.duration) : exerciseSet.duration != null)
             return false;
         if (note != null ? !note.equals(exerciseSet.note) : exerciseSet.note != null) return false;
         if (reps != null ? !reps.equals(exerciseSet.reps) : exerciseSet.reps != null) return false;
@@ -77,7 +75,7 @@ public class ExerciseSet implements Serializable {
     @Override
     public int hashCode() {
         int result1 = duration != null ? duration.hashCode() : 0;
-        result1 = 31 * result1 + (durationString != null ? durationString.hashCode() : 0);
+        result1 = 31 * result1 + (duration != null ? duration.hashCode() : 0);
         result1 = 31 * result1 + (result != null ? result.hashCode() : 0);
         result1 = 31 * result1 + (reps != null ? reps.hashCode() : 0);
         result1 = 31 * result1 + (note != null ? note.hashCode() : 0);
