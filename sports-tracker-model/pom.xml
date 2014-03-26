@@ -84,9 +84,27 @@
                     <ejbVersion>3.1</ejbVersion>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>1.6</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
     <profiles>
         <profile>
             <!-- The default profile skips all tests, though you can tune it
@@ -104,6 +122,7 @@
                         <version>2.4.3</version>
                         <configuration>
                             <skip>false</skip>
+                            <argLine>-Dfile.encoding=UTF-8</argLine>
                         </configuration>
                     </plugin>
                 </plugins>

@@ -24,9 +24,11 @@ import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.csv.CsvDataSet;
+import org.dbunit.dataset.csv.CsvURLDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
+import org.dbunit.util.fileloader.CsvDataFileLoader;
 import org.hibernate.Session;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -115,49 +117,39 @@ public class ModelTest {
 
     @Test
     public void testCreate() {
-        entityManager.getTransaction().begin();
-
-        Training training = new Training();
-
-        Exercise exercise = new Exercise();
-        exercise.setActivity(entityManager.find(Activity.class, 1));
-        ExerciseSet set1 = new ExerciseSet();
-        set1.setDuration("PT2M");
-        set1.setReps(2);
-        exercise.addSet(set1);
-        ExerciseSet set2 = new ExerciseSet();
-        set2.setResult(55.0);
-        set2.setReps(4);
-        exercise.addSet(set2);
-
-        Exercise exercise2 = new Exercise();
-        exercise.setActivity(entityManager.find(Activity.class, 1));
-        ExerciseSet set3 = new ExerciseSet();
-        set1.setDuration("PT2M");
-        set1.setReps(3);
-        exercise.addSet(set1);
-        ExerciseSet set4 = new ExerciseSet();
-        set2.setResult(55.0);
-        set2.setReps(5);
-        exercise.addSet(set2);
-
-        training.setExercises(Arrays.asList(exercise, exercise2));
-
-        entityManager.persist(training);
-
-        entityManager.getTransaction().commit();
-
-        System.out.println(entityManager.find(Training.class, 1L).getExercises());
-
-        entityManager.unwrap(Session.class).doWork(connection -> {
-            try {
-                DatabaseConnection dbConnection = new DatabaseConnection(connection);
-                FlatXmlDataSet.write(dbConnection.createDataSet(), new FileOutputStream("full.xml"));
-
-            } catch (DatabaseUnitException | IOException e) {
-                e.printStackTrace();
-            }
-        });
+//        entityManager.getTransaction().begin();
+//
+//        Training training = new Training();
+//
+//        Exercise exercise = new Exercise();
+//        exercise.setActivity(entityManager.find(Activity.class, 1));
+//        ExerciseSet set1 = new ExerciseSet();
+//        set1.setDuration("PT2M");
+//        set1.setReps(2);
+//        exercise.addSet(set1);
+//        ExerciseSet set2 = new ExerciseSet();
+//        set2.setResult(55.0);
+//        set2.setReps(4);
+//        exercise.addSet(set2);
+//
+//        Exercise exercise2 = new Exercise();
+//        exercise.setActivity(entityManager.find(Activity.class, 1));
+//        ExerciseSet set3 = new ExerciseSet();
+//        set1.setDuration("PT2M");
+//        set1.setReps(3);
+//        exercise.addSet(set1);
+//        ExerciseSet set4 = new ExerciseSet();
+//        set2.setResult(55.0);
+//        set2.setReps(5);
+//        exercise.addSet(set2);
+//
+//        training.setExercises(Arrays.asList(exercise, exercise2));
+//
+//        entityManager.persist(training);
+//
+//        entityManager.getTransaction().commit();
+//
+//        System.out.println(entityManager.find(Training.class, 1L).getExercises());
     }
 
     private void checkStats(Person p1) {
