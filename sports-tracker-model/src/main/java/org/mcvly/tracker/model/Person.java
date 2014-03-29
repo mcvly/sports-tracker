@@ -1,6 +1,11 @@
 package org.mcvly.tracker.model;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,12 +14,14 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * TODO: get rid of java.util.Date when hibernate natively supports Java 8 Date API
  * @author <a href="mailto:RMalyona@luxoft.com">Ruslan Malyona</a>
  * @since 11.02.14
  */
 @Entity
 @Table(name = "person")
 @XmlRootElement
+@Access(AccessType.FIELD)
 public class Person implements Serializable {
 
     private static final long serialVersionUID = -5008361276815324241L;
@@ -26,8 +33,19 @@ public class Person implements Serializable {
     @Column(nullable = false, length = 64)
     private String name;
 
+    private transient LocalDate birth;
+
+    @Column(name="birth")
     @Temporal(TemporalType.DATE)
-    private Date birth;
+    @Access(AccessType.PROPERTY)
+    private Date getBirthForDB() {
+        return Date.from(birth.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    private void setBirthForDB(Date myDateFromDB) {
+        birth = LocalDateTime.ofInstant(Instant.ofEpochMilli(myDateFromDB.getTime()),
+                ZoneId.systemDefault()).toLocalDate();
+    }
 
     private Integer height;
 
@@ -54,12 +72,12 @@ public class Person implements Serializable {
         this.name = name;
     }
 
-    public Date getBirth() {
+    public LocalDate getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
-        this.birth = new Date(birth.getTime());
+    public void setBirth(LocalDate birth) {
+        this.birth = birth;
     }
 
     public Integer getHeight() {
@@ -76,6 +94,10 @@ public class Person implements Serializable {
 
     public void setStats(List<PersonStats> stats) {
         this.stats = stats;
+    }
+
+    public void addStats(PersonStats stat) {
+        this.stats.add(stat);
     }
 
     public List<Training> getTrainings() {

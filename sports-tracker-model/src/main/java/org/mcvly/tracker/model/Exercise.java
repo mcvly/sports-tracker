@@ -53,6 +53,9 @@ public class Exercise implements Serializable {
 
     public void setTraining(Training training) {
         this.training = training;
+        if (!training.getExercises().contains(this)) {
+            training.addExercise(this);
+        }
     }
 
     public Activity getActivity() {
@@ -83,7 +86,6 @@ public class Exercise implements Serializable {
         Exercise exercise = (Exercise) o;
 
         if (activity != null ? !activity.equals(exercise.activity) : exercise.activity != null) return false;
-        if (id != null ? !id.equals(exercise.id) : exercise.id != null) return false;
         if (exerciseSets != null ? !exerciseSets.equals(exercise.exerciseSets) : exercise.exerciseSets != null) return false;
         if (training != null ? !training.equals(exercise.training) : exercise.training != null) return false;
 
@@ -92,8 +94,7 @@ public class Exercise implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (training != null ? training.hashCode() : 0);
+        int result = training != null ? training.hashCode() : 0;
         result = 31 * result + (activity != null ? activity.hashCode() : 0);
         result = 31 * result + (exerciseSets != null ? exerciseSets.hashCode() : 0);
         return result;

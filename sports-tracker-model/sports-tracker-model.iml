@@ -14,8 +14,8 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
         <datasource-mapping>
-          <factory-entry name="primary" value="0e82638f-797c-4483-963e-e4cf89cf0521" />
-          <factory-entry name="test" value="454b752f-425c-4751-88b9-4febcb0d552b" />
+          <factory-entry name="primary" value="ec169b0f-dc95-4ada-8aaa-eaeea9a73b9b" />
+          <factory-entry name="test" value="ec169b0f-dc95-4ada-8aaa-eaeea9a73b9b" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
@@ -29,7 +29,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/../sports-tracker-ejb/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -51,9 +50,7 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.7.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.derby:derby:10.10.1.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.derby:derbyclient:10.10.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.derby:derbytools:10.10.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.3.175" level="project" />
     <orderEntry type="library" name="Maven: org.dbunit:dbunit:2.4.9" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
   </component>

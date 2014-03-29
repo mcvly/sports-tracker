@@ -19,17 +19,15 @@
     <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <property name="javax.persistence.schema-generation.scripts.create-target" value="sports_tracker.ddl"/>
-            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:SportsTrackerDB;create=true" />
-            <property name="javax.persistence.jdbc.user" value="" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:sports_tracker;INIT=RUNSCRIPT FROM 'sql/sports_tracker.ddl';DB_CLOSE_DELAY=-1" />
+            <property name="javax.persistence.jdbc.user" value="sa" />
             <property name="javax.persistence.jdbc.password" value="" />
-            <property name="eclipselink.logging.level" value="INFO"/>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
         </properties>
     </persistence-unit>
 
