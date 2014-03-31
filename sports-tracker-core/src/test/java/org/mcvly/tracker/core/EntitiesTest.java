@@ -1,4 +1,4 @@
-package org.mcvly.tracker.test;
+package org.mcvly.tracker.core;
 
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConnection;
@@ -14,13 +14,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mcvly.tracker.model.Activity;
-import org.mcvly.tracker.model.Exercise;
-import org.mcvly.tracker.model.ExerciseSet;
-import org.mcvly.tracker.model.Person;
-import org.mcvly.tracker.model.PersonStats;
-import org.mcvly.tracker.model.Training;
-import org.mcvly.tracker.model.TrainingType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -42,7 +35,7 @@ import static org.junit.Assert.assertNotNull;
  * @author <a href="mailto:RMalyona@luxoft.com">Ruslan Malyona</a>
  * @since 11.02.14
  */
-public class ModelTest {
+public class EntitiesTest {
 
     private static final String TEST_UNIT = "test";
     /** The factory that produces entity manager. */

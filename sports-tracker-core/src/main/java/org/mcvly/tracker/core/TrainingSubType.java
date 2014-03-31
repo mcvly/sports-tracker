@@ -1,4 +1,4 @@
-package org.mcvly.tracker.model;
+package org.mcvly.tracker.core;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
