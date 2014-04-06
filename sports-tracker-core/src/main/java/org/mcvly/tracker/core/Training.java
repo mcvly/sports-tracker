@@ -1,12 +1,11 @@
 package org.mcvly.tracker.core;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,25 +14,33 @@ import java.util.List;
  */
 @Entity
 @Table(name = "training")
-@Access(AccessType.PROPERTY)
 public class Training implements Serializable {
 
     private static final long serialVersionUID = -4720839718136077131L;
 
-    private Long id;
-
-    private TrainingType type;
-
-    private Person trainee;
-
-    private LocalDateTime trainingStart;
-
-    private LocalDateTime trainingStop;
-
-    private List<Exercise> exercises = new ArrayList<>();
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private TrainingType type;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person trainee;
+
+    @Column(name = "training_start")
+//    @Type(type="org.jadira.usertype.dateandtime.threeten.PersistentLocalDateTime")
+    private LocalDateTime trainingStart;
+
+    @Column(name = "training_stop")
+//    @Type(type="org.jadira.usertype.dateandtime.threeten.PersistentLocalDateTime")
+    private LocalDateTime trainingStop;
+
+    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
+    private List<Exercise> exercises = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
@@ -42,8 +49,6 @@ public class Training implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "type_id")
     public TrainingType getType() {
         return type;
     }
@@ -52,8 +57,6 @@ public class Training implements Serializable {
         this.type = type;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "person_id")
     public Person getTrainee() {
         return trainee;
     }
@@ -62,27 +65,6 @@ public class Training implements Serializable {
         this.trainee = trainee;
     }
 
-    @Column(name = "training_start")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date getTrainingStartDB() {
-        return trainingStart != null ? Date.from(trainingStart.atZone(ZoneId.systemDefault()).toInstant()) : null;
-    }
-
-    private void setTrainingStartDB(Date trainingStart) {
-        this.trainingStart = LocalDateTime.ofInstant(Instant.ofEpochMilli(trainingStart.getTime()), ZoneId.systemDefault());
-    }
-
-    @Column(name = "training_stop")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date getTrainingStopDB() {
-        return trainingStop != null ? Date.from(trainingStop.atZone(ZoneId.systemDefault()).toInstant()) : null;
-    }
-
-    private void setTrainingStopDB(Date trainingStop) {
-        this.trainingStop = LocalDateTime.ofInstant(Instant.ofEpochMilli(trainingStop.getTime()), ZoneId.systemDefault());
-    }
-
-    @Transient
     public LocalDateTime getTrainingStart() {
         return trainingStart;
     }
@@ -91,7 +73,6 @@ public class Training implements Serializable {
         this.trainingStart = trainingStart;
     }
 
-    @Transient
     public LocalDateTime getTrainingStop() {
         return trainingStop;
     }
@@ -100,15 +81,15 @@ public class Training implements Serializable {
         this.trainingStop = trainingStop;
     }
 
-    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
     public List<Exercise> getExercises() {
         return exercises;
     }
 
     public void setExercises(List<Exercise> exercises) {
-        for (Exercise exercise : exercises) {
-            exercise.setTraining(this);
-        }
+//        for (Exercise exercise : exercises) {
+//            exercise.setTraining(this);
+//        }
+        this.exercises = exercises;
     }
 
     public void addExercise(Exercise exercise) {
@@ -155,7 +136,7 @@ public class Training implements Serializable {
         return "Training{" +
                 "id=" + id +
                 ", type=" + type +
-                ", trainee=" + trainee.getName() +
+                ", trainee=" + (trainee != null ? trainee.getName() : null) +
                 ", trainingStart=" + trainingStart +
                 ", trainingStop=" + trainingStop +
                 ", exercises=" + exercises +

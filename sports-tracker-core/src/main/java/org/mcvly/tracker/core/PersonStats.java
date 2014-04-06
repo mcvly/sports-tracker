@@ -1,5 +1,7 @@
 package org.mcvly.tracker.core;
 
+import org.hibernate.annotations.Type;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -8,6 +10,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
@@ -16,30 +19,22 @@ import javax.persistence.Transient;
 
 /**
  * TODO: get rid of java.util.Date when hibernate natively supports Java 8 Date API
- * @author <a href="mailto:RMalyona@luxoft.com">Ruslan Malyona</a>
+ * @author mcvly
  * @since 11.02.14
  */
 @Embeddable
-@Access(AccessType.PROPERTY)
 public class PersonStats implements Serializable {
 
     private static final long serialVersionUID = -3600120141713936957L;
 
+//    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, name = "measure_date")
+//    @Type(type="org.jadira.usertype.dateandtime.threeten.PersistentLocalDateTime")
     private LocalDateTime measureDate;
 
+    @Column(nullable = false, name = "weight")
     private Double weight;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "measureDate")
-    private Date getMeasureDateForDB() {
-        return measureDate != null ? Date.from(measureDate.atZone(ZoneId.systemDefault()).toInstant()) : null;
-    }
-
-    private void setMeasureDateForDB(Date measureDate) {
-        this.measureDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(measureDate.getTime()), ZoneId.systemDefault());
-    }
-
-    @Column(nullable = false, name = "weight")
     public Double getWeight() {
         return weight;
     }
@@ -48,7 +43,6 @@ public class PersonStats implements Serializable {
         this.weight = weight;
     }
 
-    @Transient
     public LocalDateTime getMeasureDate() {
         return measureDate;
     }

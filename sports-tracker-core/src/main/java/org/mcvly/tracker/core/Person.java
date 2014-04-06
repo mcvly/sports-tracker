@@ -1,5 +1,7 @@
 package org.mcvly.tracker.core;
 
+import org.hibernate.annotations.Type;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -13,14 +15,13 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * TODO: get rid of java.util.Date when hibernate natively supports Java 8 Date API
- * @author <a href="mailto:RMalyona@luxoft.com">Ruslan Malyona</a>
+ * TODO: get rid of type converter when hibernate natively supports Java 8 Date API
+ * @author mcvly
  * @since 11.02.14
  */
 @Entity
 @Table(name = "person")
 @XmlRootElement
-@Access(AccessType.FIELD)
 public class Person implements Serializable {
 
     private static final long serialVersionUID = -5008361276815324241L;
@@ -32,23 +33,15 @@ public class Person implements Serializable {
     @Column(nullable = false, length = 64)
     private String name;
 
-    private transient LocalDate birth;
-
     @Column(name="birth")
-    @Temporal(TemporalType.DATE)
-    @Access(AccessType.PROPERTY)
-    private Date getBirthForDB() {
-        return Date.from(birth.atStartOfDay(ZoneId.systemDefault()).toInstant());
-    }
+//    @Temporal(TemporalType.DATE)
+//    @Type(type="org.jadira.usertype.dateandtime.threeten.PersistentLocalDate")
+    private LocalDate birth;
 
-    private void setBirthForDB(Date myDateFromDB) {
-        birth = LocalDateTime.ofInstant(Instant.ofEpochMilli(myDateFromDB.getTime()),
-                ZoneId.systemDefault()).toLocalDate();
-    }
-
+    @Basic
     private Integer height;
 
-    @ElementCollection // one-to-many with embeddable
+    @ElementCollection// one-to-many with embeddable
     @CollectionTable(name = "person_stats", joinColumns = @JoinColumn(name = "person_id"))
     private List<PersonStats> stats = new ArrayList<>();
 
@@ -107,6 +100,10 @@ public class Person implements Serializable {
         this.trainings.add(training);
     }
 
+    public void setTrainings(List<Training> trainings) {
+        this.trainings = trainings;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -114,8 +111,6 @@ public class Person implements Serializable {
                 ", name='" + name + '\'' +
                 ", birth=" + birth +
                 ", height=" + height +
-                ", stats=" + stats +
-                ", trainings=" + trainings +
                 '}';
     }
 }

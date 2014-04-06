@@ -30,7 +30,7 @@ CREATE TABLE person
 CREATE TABLE person_stats
 (
     person_id INT NOT NULL,
-    measureDate DATETIME NOT NULL,
+    measure_date DATETIME NOT NULL,
     weight DOUBLE NOT NULL
 );
 CREATE TABLE training

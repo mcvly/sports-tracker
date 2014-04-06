@@ -1,14 +1,6 @@
 package org.mcvly.tracker.core;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +27,7 @@ public class Exercise implements Serializable {
     @JoinColumn(name = "activity_id")
     private Activity activity;
 
-    @ElementCollection // one-to-many with embeddable
+    @ElementCollection(fetch = FetchType.EAGER) // one-to-many with embeddable
     @CollectionTable(name = "exercise_set", joinColumns = @JoinColumn(name = "exercise_id"))
     private List<ExerciseSet> exerciseSets = new ArrayList<>();
 

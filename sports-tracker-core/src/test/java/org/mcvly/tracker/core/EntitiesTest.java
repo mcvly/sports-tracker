@@ -32,7 +32,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * @author <a href="mailto:RMalyona@luxoft.com">Ruslan Malyona</a>
+ * @author mcvly
  * @since 11.02.14
  */
 public class EntitiesTest {
