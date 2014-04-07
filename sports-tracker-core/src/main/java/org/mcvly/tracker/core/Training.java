@@ -41,6 +41,14 @@ public class Training implements Serializable {
     @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
     private List<Exercise> exercises = new ArrayList<>();
 
+    public Training() {}
+
+    public Training(TrainingType type, LocalDateTime trainingStart, LocalDateTime trainingStop) {
+        this.type = type;
+        this.trainingStart = trainingStart;
+        this.trainingStop = trainingStop;
+    }
+
     public Long getId() {
         return id;
     }

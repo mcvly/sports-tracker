@@ -16,4 +16,8 @@ import java.util.List;
  */
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer> {
+
+    @Query("select new Person(p.name, p.birth, p.height) from Person p where p.id = :personId")
+    public Person getInfo(@Param("personId") Integer id);
+
 }

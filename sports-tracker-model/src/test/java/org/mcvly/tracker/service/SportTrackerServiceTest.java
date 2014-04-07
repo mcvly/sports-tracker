@@ -85,7 +85,20 @@ public class SportTrackerServiceTest {
 
     @Test
     public void testTrainingList() {
-        List<Training> trainings = sportTrackerService.getTrainingsWithExercises(101, 0, 1);
-        System.out.println(trainings);
+        List<Training> trainings = sportTrackerService.getTrainingsWithExercises(101, 0, 10);
+        assertEquals(2, trainings.size());
+        trainings = sportTrackerService.getTrainingsWithExercises(101, 0, 1);
+        assertEquals(1, trainings.size());
+    }
+
+    @Test
+    public void testInsertTraining() {
+        Training my = new Training();
+        my.setType(sportTrackerService.getTrainingTypes().get(0));
+        my.setTrainingStart(LocalDateTime.now());
+        my.setTrainingStop(LocalDateTime.now().plusHours(1));
+        sportTrackerService.addTraining(101, my);
+        System.out.println(sportTrackerService.getTrainingsWithExercises(101, 0, 10));
+        sportTrackerService.getPersonInformation(101);
     }
 }

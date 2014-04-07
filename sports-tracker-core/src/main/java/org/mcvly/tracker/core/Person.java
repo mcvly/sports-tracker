@@ -48,6 +48,14 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "trainee")
     private List<Training> trainings = new ArrayList<>();
 
+    public Person() {}
+
+    public Person(String name, LocalDate birth, Integer height) {
+        this.name = name;
+        this.birth = birth;
+        this.height = height;
+    }
+
     public Integer getId() {
         return id;
     }

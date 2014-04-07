@@ -1,5 +1,6 @@
 package org.mcvly.tracker.model.service.impl;
 
+import org.mcvly.tracker.core.Activity;
 import org.mcvly.tracker.core.Person;
 import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
@@ -43,13 +44,7 @@ public class SportTrackerServiceImpl implements SportTrackerService {
 
     @Override
     public Person getPersonInformation(Integer personId) {
-        Person p = personRepository.findOne(personId);
-        Person p1 = new Person();
-        p1.setBirth(p.getBirth());
-        p1.setName(p.getName());
-        p1.setHeight(p.getHeight());
-
-        return p1;
+        return personRepository.getInfo(personId);
     }
 
     @Transactional(readOnly = true)
@@ -67,17 +62,7 @@ public class SportTrackerServiceImpl implements SportTrackerService {
     public List<Training> getTrainingInfos(Integer personId, LocalDateTime since) {
         Person p = new Person();
         p.setId(personId);
-        List<Training> trainings = trainingRepository.findByTraineeAndTrainingStartAfter(p, since);
-        List<Training> resultTrainings = new ArrayList<>(trainings.size());
-        for (Training training : trainings) {
-            Training to = new Training();
-            to.setTrainingStart(training.getTrainingStart());
-            to.setTrainingStop(training.getTrainingStop());
-            to.setType(training.getType());
-            resultTrainings.add(to);
-        }
-
-        return resultTrainings;
+        return trainingRepository.findByTraineeAndTrainingStartAfter(p, since);
     }
 
     @Override
@@ -96,5 +81,39 @@ public class SportTrackerServiceImpl implements SportTrackerService {
     @Override
     public List<TrainingSubType> getTrainingSubtypes(Integer typeId) {
         return trainingSubTypeRepository.findAll();
+    }
+
+    @Transactional
+    @Override
+    public void addTraining(Integer personId, Training training) {
+        Person trainee = personRepository.findOne(personId);
+        trainee.addTraining(training);
+        training.setTrainee(trainee);
+        trainingRepository.save(training);
+    }
+
+    @Override
+    public void updateTraining(Training trainingToUpdate) {
+
+    }
+
+    @Override
+    public void addStat(Integer personId, PersonStats stat) {
+
+    }
+
+    @Override
+    public void addActivity(Activity activity) {
+
+    }
+
+    @Override
+    public void removeActivity(Activity activity) {
+
+    }
+
+    @Override
+    public void updateActivity(Activity activity) {
+
     }
 }

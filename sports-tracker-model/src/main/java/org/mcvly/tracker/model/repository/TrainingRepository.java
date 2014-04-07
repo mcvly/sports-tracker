@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface TrainingRepository extends JpaRepository<Training, Long> {
 
-    //@Query("from Training t where t.trainee = :trainee and t.trainingStart > :startDate")
+    @Query("select new Training (t.type, t.trainingStart, t.trainingStop) from Training t where t.trainee = :trainee and t.trainingStart > :startDate")
     public List<Training> findByTraineeAndTrainingStartAfter(@Param("trainee") Person trainee,
                                                              @Param("startDate") LocalDateTime startDate);
 

@@ -1,5 +1,6 @@
 package org.mcvly.tracker.model.service;
 
+import org.mcvly.tracker.core.Activity;
 import org.mcvly.tracker.core.Person;
 import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
@@ -27,5 +28,17 @@ public interface SportTrackerService {
     List<TrainingType> getTrainingTypes();
 
     List<TrainingSubType> getTrainingSubtypes(Integer typeId);
+
+    void addTraining(Integer personId, Training training);
+
+    void updateTraining(Training trainingToUpdate);
+
+    void addStat(Integer personId, PersonStats stat);
+
+    void addActivity(Activity activity);
+
+    void removeActivity(Activity activity);
+
+    void updateActivity(Activity activity);
 
 }
