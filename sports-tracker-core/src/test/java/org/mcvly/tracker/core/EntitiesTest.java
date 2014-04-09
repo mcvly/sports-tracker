@@ -140,7 +140,7 @@ public class EntitiesTest {
         assertEquals(createStat2(), stats.get(1));
         //check training
         Training training = createTraining1(p1);
-        Exercise exercise1 = createExercise1(training);
+        Exercise exercise1 = createExercise1(null);
         training.setExercises(new ArrayList<>(Arrays.asList(exercise1)));
         persistTraining(training); // persist with exercises
         //check exercise
@@ -149,8 +149,9 @@ public class EntitiesTest {
         assertEquals(1, training1.getExercises().size());
         assertEquals(exercise1, training.getExercises().get(0));
         //check exercise
-        Exercise exercise2 = createExercise2(training1);
-        persistExercise(exercise2); // persist exercise, training should update
+        Exercise exercise2 = createExercise2(null);
+        training.addExercise(exercise2);
+        updateTraining(training);
         //check exercise
         training1 = entityManager.find(Training.class, training1.getId());
         assertEquals(2, training1.getExercises().size());
@@ -273,7 +274,10 @@ public class EntitiesTest {
         exerciseSet2.setNote("note1");
         exerciseSet2.setDuration("PT1M1s");
 
-        exercise.setExerciseSets(Arrays.asList(exerciseSet, exerciseSet2));
+        List<ExerciseSet> exerciseSets = new ArrayList<>();
+        exerciseSets.add(exerciseSet);
+        exerciseSets.add(exerciseSet2);
+        exercise.setExerciseSets(exerciseSets);
 
         return exercise;
     }
@@ -293,7 +297,10 @@ public class EntitiesTest {
         exerciseSet2.setResult(50.0);
         exerciseSet2.setNote("note3");
 
-        exercise.setExerciseSets(Arrays.asList(exerciseSet, exerciseSet2));
+        List<ExerciseSet> exerciseSets = new ArrayList<>();
+        exerciseSets.add(exerciseSet);
+        exerciseSets.add(exerciseSet2);
+        exercise.setExerciseSets(exerciseSets);
 
         return exercise;
     }
@@ -307,15 +314,11 @@ public class EntitiesTest {
         exerciseSet.setDuration("PT30M");
         exerciseSet.setResult(5.6);
 
-        exercise.setExerciseSets(Arrays.asList(exerciseSet));
+        List<ExerciseSet> exerciseSets = new ArrayList<>();
+        exerciseSets.add(exerciseSet);
+        exercise.setExerciseSets(exerciseSets);
 
         return exercise;
-    }
-
-    private void persistExercise(Exercise exercise) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(exercise);
-        entityManager.getTransaction().commit();
     }
 
 }

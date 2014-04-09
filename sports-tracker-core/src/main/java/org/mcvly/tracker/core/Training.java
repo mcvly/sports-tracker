@@ -94,10 +94,10 @@ public class Training implements Serializable {
     }
 
     public void setExercises(List<Exercise> exercises) {
-//        for (Exercise exercise : exercises) {
-//            exercise.setTraining(this);
-//        }
-        this.exercises = exercises;
+        for (Exercise exercise : exercises) {
+            exercise.setTraining(this);
+        }
+        this.exercises = new ArrayList<>(exercises);
     }
 
     public void addExercise(Exercise exercise) {

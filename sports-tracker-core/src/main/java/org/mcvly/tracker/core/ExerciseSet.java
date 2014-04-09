@@ -63,8 +63,6 @@ public class ExerciseSet implements Serializable {
         ExerciseSet exerciseSet = (ExerciseSet) o;
 
         if (duration != null ? !duration.equals(exerciseSet.duration) : exerciseSet.duration != null) return false;
-        if (duration != null ? !duration.equals(exerciseSet.duration) : exerciseSet.duration != null)
-            return false;
         if (note != null ? !note.equals(exerciseSet.note) : exerciseSet.note != null) return false;
         if (reps != null ? !reps.equals(exerciseSet.reps) : exerciseSet.reps != null) return false;
         if (result != null ? !result.equals(exerciseSet.result) : exerciseSet.result != null) return false;

@@ -83,7 +83,7 @@ public class Activity implements Serializable {
         if (id != null ? !id.equals(activity.id) : activity.id != null) return false;
         if (name != null ? !name.equals(activity.name) : activity.name != null) return false;
         if (subType != null ? !subType.equals(activity.subType) : activity.subType != null) return false;
-        if (type != activity.type) return false;
+        if (type != null ? !type.equals(activity.type) : activity.type != null) return false;
 
         return true;
     }

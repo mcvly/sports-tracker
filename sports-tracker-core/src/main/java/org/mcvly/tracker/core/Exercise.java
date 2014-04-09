@@ -45,9 +45,6 @@ public class Exercise implements Serializable {
 
     public void setTraining(Training training) {
         this.training = training;
-        if (!training.getExercises().contains(this)) {
-            training.addExercise(this);
-        }
     }
 
     public Activity getActivity() {
@@ -79,7 +76,7 @@ public class Exercise implements Serializable {
 
         if (activity != null ? !activity.equals(exercise.activity) : exercise.activity != null) return false;
         if (exerciseSets != null ? !exerciseSets.equals(exercise.exerciseSets) : exercise.exerciseSets != null) return false;
-        if (training != null ? !training.equals(exercise.training) : exercise.training != null) return false;
+        if (training != null && training.getExercises() != null ? !training.getId().equals(exercise.training.getId()) : exercise.training != null) return false;
 
         return true;
     }
@@ -98,6 +95,7 @@ public class Exercise implements Serializable {
                 "id=" + id +
                 ", activity=" + activity +
                 ", exerciseSets=" + exerciseSets +
+                ", trainingId=" + training.getId() +
                 '}';
     }
 }
