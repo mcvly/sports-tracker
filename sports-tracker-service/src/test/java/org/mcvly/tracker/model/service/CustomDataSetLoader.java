@@ -1,15 +1,12 @@
-package org.mcvly.tracker.service;
+package org.mcvly.tracker.model.service;
 
 import com.github.springtestdbunit.dataset.AbstractDataSetLoader;
 import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.csv.CsvDataSet;
+import org.dbunit.dataset.csv.CsvURLDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-
-import java.io.File;
 
 /**
  * @author mcvly
@@ -23,7 +20,7 @@ public class CustomDataSetLoader extends AbstractDataSetLoader {
     @Override
     protected IDataSet createDataSet(Resource resource) throws Exception {
         return new CompositeDataSet(
-                new CsvDataSet(resource.getFile()),
+                new CsvURLDataSet(resource.getURL()),
                 new FlatXmlDataSetBuilder().build(initDataSet.getInputStream())
         );
     }
