@@ -13,24 +13,21 @@ import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
 import org.mcvly.tracker.core.TrainingSubType;
 import org.mcvly.tracker.core.TrainingType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.mcvly.tracker.model.config.PersistenceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -51,26 +48,14 @@ import static org.junit.Assert.*;
 @SpringApplicationConfiguration(classes = SportTrackerServiceTest.Application.class)
 @DbUnitConfiguration(dataSetLoader = CustomDataSetLoader.class)
 @DatabaseSetup("classpath:/sql/")
-@ActiveProfiles("dev")
 public class SportTrackerServiceTest {
 
-    @ComponentScan
+    @Configuration
     @EnableAutoConfiguration
+    @PropertySource("classpath:application.properties")
+    @ComponentScan("org.mcvly.tracker.model") // discover service bean
+    @Import(PersistenceConfig.class) // persistence settings
     static class Application {
-
-        private final Logger log = LoggerFactory.getLogger(Application.class);
-
-        @Resource
-        private Environment env;
-
-        @PostConstruct
-        public void initApplication() throws IOException {
-            if (env.getActiveProfiles().length == 0) {
-                log.warn("No Spring profile configured, running with default configuration");
-            } else {
-                log.info("Running with Spring profile(s) : {}", Arrays.toString(env.getActiveProfiles()));
-            }
-        }
 
         public static void main(String[] args) {
             SpringApplication app = new SpringApplication(Application.class);
