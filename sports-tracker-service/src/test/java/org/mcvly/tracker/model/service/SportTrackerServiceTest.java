@@ -46,13 +46,12 @@ import static org.junit.Assert.*;
         DbUnitTestExecutionListener.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SportTrackerServiceTest.Application.class)
-@DbUnitConfiguration(dataSetLoader = CustomDataSetLoader.class)
-@DatabaseSetup("classpath:/sql/")
+@DbUnitConfiguration(dataSetLoader = CustomDataSetLoader.class) // custom dbunit loader
+@DatabaseSetup("classpath:/sql/") // csv dir
 public class SportTrackerServiceTest {
 
     @Configuration
     @EnableAutoConfiguration
-    @PropertySource("classpath:application.properties")
     @ComponentScan("org.mcvly.tracker.model") // discover service bean
     @Import(PersistenceConfig.class) // persistence settings
     static class Application {

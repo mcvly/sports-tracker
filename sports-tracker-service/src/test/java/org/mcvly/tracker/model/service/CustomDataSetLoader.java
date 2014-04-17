@@ -9,6 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 /**
+ * Loads csv files from resource dir as well as initDataSet
  * @author mcvly
  * @since 01.04.14
  */
