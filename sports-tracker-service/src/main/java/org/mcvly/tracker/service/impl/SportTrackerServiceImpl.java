@@ -1,4 +1,4 @@
-package org.mcvly.tracker.model.service.impl;
+package org.mcvly.tracker.service.impl;
 
 import org.mcvly.tracker.core.Activity;
 import org.mcvly.tracker.core.Exercise;
@@ -7,23 +7,20 @@ import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
 import org.mcvly.tracker.core.TrainingSubType;
 import org.mcvly.tracker.core.TrainingType;
-import org.mcvly.tracker.model.repository.ActivityRepository;
-import org.mcvly.tracker.model.repository.PersonRepository;
-import org.mcvly.tracker.model.repository.TrainingRepository;
-import org.mcvly.tracker.model.repository.TrainingSubTypeRepository;
-import org.mcvly.tracker.model.repository.TrainingTypeRepository;
-import org.mcvly.tracker.model.service.STServiceException;
-import org.mcvly.tracker.model.service.SportTrackerService;
+import org.mcvly.tracker.repository.ActivityRepository;
+import org.mcvly.tracker.repository.PersonRepository;
+import org.mcvly.tracker.repository.TrainingRepository;
+import org.mcvly.tracker.repository.TrainingSubTypeRepository;
+import org.mcvly.tracker.repository.TrainingTypeRepository;
+import org.mcvly.tracker.service.STServiceException;
+import org.mcvly.tracker.service.SportTrackerService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

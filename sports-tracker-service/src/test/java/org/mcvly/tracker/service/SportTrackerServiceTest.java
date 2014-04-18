@@ -1,10 +1,11 @@
-package org.mcvly.tracker.model.service;
+package org.mcvly.tracker.service;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mcvly.tracker.Application;
 import org.mcvly.tracker.core.Activity;
 import org.mcvly.tracker.core.Exercise;
 import org.mcvly.tracker.core.ExerciseSet;
@@ -13,7 +14,6 @@ import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
 import org.mcvly.tracker.core.TrainingSubType;
 import org.mcvly.tracker.core.TrainingType;
-import org.mcvly.tracker.model.service.config.ServiceTestConfiguration;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -39,7 +39,7 @@ import static org.junit.Assert.*;
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ServiceTestConfiguration.class)
+@SpringApplicationConfiguration(classes = Application.class)
 @DbUnitConfiguration(dataSetLoader = CustomDataSetLoader.class) // custom dbunit loader
 @DatabaseSetup("classpath:/sql/") // csv dir
 public class SportTrackerServiceTest {

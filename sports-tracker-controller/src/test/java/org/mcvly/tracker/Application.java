@@ -1,9 +1,14 @@
-package org.mcvly.tracker.controller;
+package org.mcvly.tracker;
 
+import org.mcvly.tracker.config.ServiceTestConfiguration;
+import org.mcvly.tracker.service.SportTrackerService;
+import org.mockito.Mockito;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author mcvly
@@ -12,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
+@Import(ServiceTestConfiguration.class)
 public class Application {
 
     public static void main(String[] args) {

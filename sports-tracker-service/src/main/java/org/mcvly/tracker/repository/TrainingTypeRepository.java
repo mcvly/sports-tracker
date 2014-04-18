@@ -1,8 +1,7 @@
-package org.mcvly.tracker.model.repository;
+package org.mcvly.tracker.repository;
 
 import org.mcvly.tracker.core.TrainingType;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 /**
  * @author mcvly

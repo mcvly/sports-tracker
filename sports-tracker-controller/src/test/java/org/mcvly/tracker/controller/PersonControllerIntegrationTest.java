@@ -3,6 +3,8 @@ package org.mcvly.tracker.controller;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mcvly.tracker.Application;
+import org.mcvly.tracker.service.SportTrackerService;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,13 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@ComponentScan("org.mcvly.tracker.controller")
-public class PersonControllerTest {
+public class PersonControllerIntegrationTest {
 
     private MockMvc mockMvc;
-
-    @Resource
-    private PersonController controller;
 
     @Resource
     WebApplicationContext wac;
@@ -42,7 +40,8 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testLoadCustomerPage() throws Exception{
+    public void testLoadExistingPerson() throws Exception{
         this.mockMvc.perform(get("/person/1")).andExpect(status().isOk());
     }
+
 }

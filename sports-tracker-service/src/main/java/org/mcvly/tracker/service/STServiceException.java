@@ -1,4 +1,4 @@
-package org.mcvly.tracker.model.service;
+package org.mcvly.tracker.service;
 
 /**
  * @author mcvly

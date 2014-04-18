@@ -1,4 +1,4 @@
-package org.mcvly.tracker.model.service;
+package org.mcvly.tracker.service;
 
 import org.mcvly.tracker.core.Activity;
 import org.mcvly.tracker.core.Exercise;
@@ -8,7 +8,6 @@ import org.mcvly.tracker.core.Training;
 import org.mcvly.tracker.core.TrainingSubType;
 import org.mcvly.tracker.core.TrainingType;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.mcvly.tracker.model.repository;
+package org.mcvly.tracker.repository;
 
 import org.mcvly.tracker.core.Person;
 import org.mcvly.tracker.core.Training;

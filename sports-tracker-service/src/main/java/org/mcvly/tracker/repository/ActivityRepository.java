@@ -1,4 +1,4 @@
-package org.mcvly.tracker.model.repository;
+package org.mcvly.tracker.repository;
 
 import org.mcvly.tracker.core.Activity;
 import org.springframework.data.jpa.repository.JpaRepository;

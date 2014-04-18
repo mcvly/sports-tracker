@@ -1,4 +1,4 @@
-package org.mcvly.tracker.model.service;
+package org.mcvly.tracker.service;
 
 import com.github.springtestdbunit.dataset.AbstractDataSetLoader;
 import org.dbunit.dataset.CompositeDataSet;
