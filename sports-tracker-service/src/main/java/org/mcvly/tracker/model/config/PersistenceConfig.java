@@ -15,7 +15,7 @@ import java.util.List;
  * @since 16.04.14
  */
 @Configuration
-@EntityScan("org.mcvly.tracker.core")
+@EntityScan(basePackages = {"org.mcvly.tracker.core", "org.mcvly.tracker.model.service"})
 @EnableJpaRepositories("org.mcvly.tracker.model.repository")
 @EnableTransactionManagement
 public class PersistenceConfig {

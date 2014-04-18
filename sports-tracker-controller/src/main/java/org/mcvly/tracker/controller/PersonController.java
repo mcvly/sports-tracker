@@ -1,7 +1,7 @@
 package org.mcvly.tracker.controller;
 
 import org.mcvly.tracker.core.Person;
-import org.mcvly.tracker.model.repository.PersonRepository;
+import org.mcvly.tracker.model.service.SportTrackerService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +19,11 @@ import javax.annotation.Resource;
 public class PersonController {
 
     @Resource
-    private PersonRepository personRepository;
+    private SportTrackerService sportTrackerService;
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public Person information(@PathVariable("id") Integer personId) {
-        return personRepository.getInfo(personId);
+        return sportTrackerService.getPersonInformation(personId);
     }
 
 }

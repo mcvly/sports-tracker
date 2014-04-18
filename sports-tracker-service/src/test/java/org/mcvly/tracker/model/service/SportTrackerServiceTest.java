@@ -13,14 +13,8 @@ import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
 import org.mcvly.tracker.core.TrainingSubType;
 import org.mcvly.tracker.core.TrainingType;
-import org.mcvly.tracker.model.config.PersistenceConfig;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.mcvly.tracker.model.service.config.ServiceTestConfiguration;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
@@ -45,24 +39,10 @@ import static org.junit.Assert.*;
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SportTrackerServiceTest.Application.class)
+@SpringApplicationConfiguration(classes = ServiceTestConfiguration.class)
 @DbUnitConfiguration(dataSetLoader = CustomDataSetLoader.class) // custom dbunit loader
 @DatabaseSetup("classpath:/sql/") // csv dir
 public class SportTrackerServiceTest {
-
-    @Configuration
-    @EnableAutoConfiguration
-    @ComponentScan("org.mcvly.tracker.model") // discover service bean
-    @Import(PersistenceConfig.class) // persistence settings
-    static class Application {
-
-        public static void main(String[] args) {
-            SpringApplication app = new SpringApplication(Application.class);
-            app.setShowBanner(false);
-            app.run(args);
-        }
-
-    }
 
     @Resource
     private SportTrackerService sportTrackerService;

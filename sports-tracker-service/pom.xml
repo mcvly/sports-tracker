@@ -11,10 +11,9 @@
     </parent>
 
     <artifactId>sports-tracker-service</artifactId>
-
     <version>1.0-SNAPSHOT</version>
-
     <name>sports-tracker-service</name>
+    <packaging>jar</packaging>
 
     <url>http://maven.apache.org</url>
 
@@ -126,4 +125,19 @@
         </profile>
 
     </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
