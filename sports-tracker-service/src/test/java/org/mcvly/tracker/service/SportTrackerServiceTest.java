@@ -67,11 +67,15 @@ public class SportTrackerServiceTest {
         assertTrue(person.getStats().isEmpty());
     }
 
+    @Test
+    public void testInfoOfNonExistedPerson() throws STServiceException {
+        assertNull(sportTrackerService.getPersonInformation(102));
+    }
+
     @Test(expected = STServiceException.class)
     public void testStatsOfNonExistedPerson() throws STServiceException {
         sportTrackerService.getPersonStats(102, 1);
     }
-
 
     @Test
     public void testPersonStats() throws STServiceException {

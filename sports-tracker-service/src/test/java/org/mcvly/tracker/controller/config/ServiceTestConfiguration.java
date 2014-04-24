@@ -1,4 +1,4 @@
-package org.mcvly.tracker.config;
+package org.mcvly.tracker.controller.config;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;

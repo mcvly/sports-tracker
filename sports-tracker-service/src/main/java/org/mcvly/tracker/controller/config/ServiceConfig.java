@@ -1,4 +1,4 @@
-package org.mcvly.tracker.config;
+package org.mcvly.tracker.controller.config;
 
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Configuration;

@@ -23,7 +23,12 @@ public class PersonController {
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public Person information(@PathVariable("id") Integer personId) {
-        return sportTrackerService.getPersonInformation(personId);
+        Person personInformation = sportTrackerService.getPersonInformation(personId);
+        if (personInformation == null) {
+            throw new ResourceNotFoundException();
+        } else {
+            return personInformation;
+        }
     }
 
 }

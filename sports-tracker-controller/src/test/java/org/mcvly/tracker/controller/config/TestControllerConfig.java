@@ -1,4 +1,4 @@
-package org.mcvly.tracker.config;
+package org.mcvly.tracker.controller.config;
 
 import org.mcvly.tracker.service.SportTrackerService;
 import org.mockito.Mockito;
