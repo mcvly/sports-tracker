@@ -52,15 +52,15 @@ public class SportTrackerServiceImpl implements SportTrackerService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<PersonStats> getPersonStats(Integer personId, Integer size) throws STServiceException {
+    public List<PersonStats> getPersonStats(Integer personId) throws STServiceException {
         Person p = personRepository.findOne(personId);
         if (p == null) {
             throw new STServiceException("Person with id=" + personId + " not found");
         }
         List<PersonStats> stats = new ArrayList<>(p.getStats());
         stats.sort((o1, o2) -> o2.getMeasureDate().compareTo(o1.getMeasureDate()));
-        return stats.subList(0, size < stats.size() ? size : stats.size());
-
+//        return stats.subList(0, size < stats.size() ? size : stats.size());
+        return stats;
     }
 
     @Transactional(readOnly = true)

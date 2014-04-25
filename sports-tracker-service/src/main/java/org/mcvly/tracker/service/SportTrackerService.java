@@ -19,7 +19,7 @@ public interface SportTrackerService {
 
     Person getPersonInformation(Integer personId);
 
-    List<PersonStats> getPersonStats(Integer personId, Integer size) throws STServiceException;
+    List<PersonStats> getPersonStats(Integer personId) throws STServiceException;
 
     List<Training> getTrainingInfos(Integer personId, LocalDateTime since);
 

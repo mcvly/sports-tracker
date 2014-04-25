@@ -74,19 +74,15 @@ public class SportTrackerServiceTest {
 
     @Test(expected = STServiceException.class)
     public void testStatsOfNonExistedPerson() throws STServiceException {
-        sportTrackerService.getPersonStats(102, 1);
+        sportTrackerService.getPersonStats(102);
     }
 
     @Test
     public void testPersonStats() throws STServiceException {
-        List<PersonStats> stats = sportTrackerService.getPersonStats(101, 10);
+        List<PersonStats> stats = sportTrackerService.getPersonStats(101);
         assertEquals(2, stats.size());
-        stats = sportTrackerService.getPersonStats(101, 1);
-        assertEquals(1, stats.size());
 
-        PersonStats stat2 = new PersonStats();
-        stat2.setMeasureDate(LocalDateTime.of(2014, 4, 11, 11, 11, 11));
-        stat2.setWeight(67.0);
+        PersonStats stat2 = new PersonStats(LocalDateTime.of(2014, 4, 11, 11, 11, 11), 67.0);
 
         assertEquals(stat2, stats.get(0));
     }
@@ -144,12 +140,10 @@ public class SportTrackerServiceTest {
 
     @Test
     public void testAddPersonStat() throws STServiceException {
-        assertEquals(2, sportTrackerService.getPersonStats(101, 10).size());
-        PersonStats stat1 = new PersonStats();
-        stat1.setMeasureDate(LocalDateTime.now());
-        stat1.setWeight(64.8);
+        assertEquals(2, sportTrackerService.getPersonStats(101).size());
+        PersonStats stat1 = new PersonStats(LocalDateTime.now(), 64.8);
         sportTrackerService.addStat(101, stat1);
-        assertEquals(3, sportTrackerService.getPersonStats(101, 10).size());
+        assertEquals(3, sportTrackerService.getPersonStats(101).size());
     }
 
     @Test

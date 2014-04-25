@@ -205,19 +205,11 @@ public class EntitiesTest {
     }
 
     private PersonStats createStat1() {
-        PersonStats stat1 = new PersonStats();
-        stat1.setMeasureDate(LocalDateTime.of(2014, 3, 28, 19, 29, 14));
-        stat1.setWeight(66.0);
-
-        return stat1;
+        return new PersonStats(LocalDateTime.of(2014, 3, 28, 19, 29, 14), 66.0);
     }
 
     private PersonStats createStat2() {
-        PersonStats stat2 = new PersonStats();
-        stat2.setMeasureDate(LocalDateTime.of(2014, 4, 11, 11, 11, 11));
-        stat2.setWeight(67.0);
-
-        return stat2;
+        return new PersonStats(LocalDateTime.of(2014, 4, 11, 11, 11, 11), 67.0);
     }
 
     private Training createTraining1(Person p1) {

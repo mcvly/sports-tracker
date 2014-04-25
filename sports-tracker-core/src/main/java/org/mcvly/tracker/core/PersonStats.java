@@ -35,6 +35,11 @@ public class PersonStats implements Serializable {
     @Column(nullable = false, name = "weight")
     private Double weight;
 
+    public PersonStats(LocalDateTime measureDate, Double weight) {
+        this.measureDate = measureDate;
+        this.weight = weight;
+    }
+
     public Double getWeight() {
         return weight;
     }

@@ -2,12 +2,17 @@ package org.mcvly.tracker.controller;
 
 import org.junit.Test;
 import org.mcvly.tracker.core.Person;
+import org.mcvly.tracker.core.PersonStats;
 import org.springframework.http.MediaType;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -46,6 +51,27 @@ public class PersonControllerTest extends AbstractControllerTest {
         ;
 
         verify(sportTrackerServiceMock, times(1)).getPersonInformation(2);
+    }
+
+    @Test
+    public void testPersonStats() throws Exception {
+
+        LocalDateTime now = LocalDateTime.now();
+
+        when(sportTrackerServiceMock.getPersonStats(eq(1))).thenReturn(Arrays.asList(
+                new PersonStats(now, 64.2),
+                new PersonStats(LocalDateTime.now().minusWeeks(2), 64.4),
+                new PersonStats(LocalDateTime.now().minusWeeks(1), 64.3)
+        ));
+
+        mockMvc.perform(get("/person/{id}/stats", 1))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.", hasSize(3)))
+                .andExpect(jsonPath("$[0].weight", is(64.2)))
+                .andExpect(jsonPath("$[0].measureDate", is(now.toString())))
+                ;
+
     }
 
 }
