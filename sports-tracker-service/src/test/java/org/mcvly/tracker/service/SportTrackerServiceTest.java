@@ -89,10 +89,16 @@ public class SportTrackerServiceTest {
 
     @Test
     public void testTrainingInfo() {
-        List<Training> trainings = sportTrackerService.getTrainingInfos(101, LocalDateTime.of(2014, 3, 2, 0, 0, 0));
+        List<Training> trainings = sportTrackerService.getTrainingInfos(101, LocalDate.of(2014, 3, 2));
         assertEquals(2, trainings.size());
-        trainings = sportTrackerService.getTrainingInfos(101, LocalDateTime.of(2014, 3, 31, 0, 0, 0));
+        trainings = sportTrackerService.getTrainingInfos(101, LocalDate.of(2014, 3, 31));
         assertEquals(1, trainings.size());
+    }
+
+    @Test
+    public void testTrainingInfoNoDate() {
+        List<Training> trainings = sportTrackerService.getTrainingInfos(101, null);
+        assertEquals(2, trainings.size());
     }
 
     @Test

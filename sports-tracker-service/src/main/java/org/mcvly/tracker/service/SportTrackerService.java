@@ -1,5 +1,8 @@
 package org.mcvly.tracker.service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.mcvly.tracker.core.Activity;
 import org.mcvly.tracker.core.Exercise;
 import org.mcvly.tracker.core.Person;
@@ -7,9 +10,6 @@ import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
 import org.mcvly.tracker.core.TrainingSubType;
 import org.mcvly.tracker.core.TrainingType;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author mcvly
@@ -21,7 +21,7 @@ public interface SportTrackerService {
 
     List<PersonStats> getPersonStats(Integer personId) throws STServiceException;
 
-    List<Training> getTrainingInfos(Integer personId, LocalDateTime since);
+    List<Training> getTrainingInfos(Integer personId, LocalDate since);
 
     List<Training> getTrainingsWithExercises(Integer personId, Integer page, Integer size);
 

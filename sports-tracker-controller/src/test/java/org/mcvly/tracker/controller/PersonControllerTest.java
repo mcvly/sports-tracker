@@ -1,14 +1,5 @@
 package org.mcvly.tracker.controller;
 
-import org.junit.Test;
-import org.mcvly.tracker.core.Person;
-import org.mcvly.tracker.core.PersonStats;
-import org.springframework.http.MediaType;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.anyInt;
@@ -20,6 +11,17 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+import org.junit.Test;
+import org.mcvly.tracker.core.Person;
+import org.mcvly.tracker.core.PersonStats;
+import org.mcvly.tracker.core.Training;
+import org.mcvly.tracker.core.TrainingType;
+import org.springframework.http.MediaType;
 
 /**
  * @author mcvly
@@ -70,8 +72,25 @@ public class PersonControllerTest extends AbstractControllerTest {
                 .andExpect(jsonPath("$.", hasSize(3)))
                 .andExpect(jsonPath("$[0].weight", is(64.2)))
                 .andExpect(jsonPath("$[0].measureDate", is(now.toString())))
-                ;
+        ;
+    }
 
+    @Test
+    public void testTrainingInfo() throws Exception {
+        LocalDate now = LocalDate.now();
+
+        TrainingType some = new TrainingType();
+
+        Training t1 = new Training(some, now.plusDays(2).atTime(13, 13), now.plusDays(2).atTime(15, 13));
+        Training t2 = new Training(some, now.atTime(13, 13), now.atTime(15, 13));
+
+        when(sportTrackerServiceMock.getTrainingInfos(eq(1), eq(now))).thenReturn(Arrays.asList(t1, t2));
+
+        mockMvc.perform(get("/person/{id}/traininfo?since=2014-04-30", 1))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.", hasSize(2)))
+        ;
     }
 
 }

@@ -20,6 +20,8 @@ public interface TrainingRepository extends JpaRepository<Training, Long> {
     public List<Training> findByTraineeAndTrainingStartAfter(@Param("trainee") Person trainee,
                                                              @Param("startDate") LocalDateTime startDate);
 
+    public List<Training> findByTrainee(@Param("trainee") Person trainee);
+
     @Query("from Training t left join fetch t.exercises e where t.trainee = :trainee order by t.trainingStart desc")
     public List<Training> findByTraineeOrderByTrainingStartDesc(@Param("trainee") Person trainee, Pageable page);
 

@@ -1,17 +1,22 @@
 package org.mcvly.tracker.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.mcvly.tracker.core.Person;
 import org.mcvly.tracker.core.PersonStats;
+import org.mcvly.tracker.core.Training;
 import org.mcvly.tracker.service.STServiceException;
 import org.mcvly.tracker.service.SportTrackerService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author mcvly
@@ -41,6 +46,12 @@ public class PersonController {
         } catch (STServiceException e) {
             throw new ResourceNotFoundException();
         }
+    }
+
+    @RequestMapping(value = "{id}/traininfo", method = RequestMethod.GET)
+    public List<Training> trainingsInfo(@PathVariable("id") Integer personId,
+                                        @RequestParam("since") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate since) {
+        return sportTrackerService.getTrainingInfos(personId, since);
     }
 
 }

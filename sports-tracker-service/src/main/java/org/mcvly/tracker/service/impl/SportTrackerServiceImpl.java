@@ -1,5 +1,11 @@
 package org.mcvly.tracker.service.impl;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.mcvly.tracker.core.Activity;
 import org.mcvly.tracker.core.Exercise;
 import org.mcvly.tracker.core.Person;
@@ -17,11 +23,6 @@ import org.mcvly.tracker.service.SportTrackerService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author mcvly
@@ -65,10 +66,14 @@ public class SportTrackerServiceImpl implements SportTrackerService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Training> getTrainingInfos(Integer personId, LocalDateTime since) {
+    public List<Training> getTrainingInfos(Integer personId, LocalDate since) {
         Person p = new Person();
         p.setId(personId);
-        return trainingRepository.findByTraineeAndTrainingStartAfter(p, since);
+        if (since == null) {
+            return trainingRepository.findByTrainee(p);
+        } else {
+            return trainingRepository.findByTraineeAndTrainingStartAfter(p, since.atStartOfDay());
+        }
     }
 
     @Override
