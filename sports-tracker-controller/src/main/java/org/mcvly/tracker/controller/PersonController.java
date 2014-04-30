@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value="/person/", produces= MediaType.APPLICATION_JSON_VALUE)
-public class PersonController {
+class PersonController {
 
     @Resource
     private SportTrackerService sportTrackerService;
@@ -52,6 +52,13 @@ public class PersonController {
     public List<Training> trainingsInfo(@PathVariable("id") Integer personId,
                                         @RequestParam(value = "since", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate since) {
         return sportTrackerService.getTrainingInfos(personId, since);
+    }
+
+    @RequestMapping(value = "{id}/trainings", params = { "page", "size" }, method = RequestMethod.GET)
+    public List<Training> trainings(@PathVariable("id") Integer personId,
+                                    @RequestParam(value = "page", required = false) int page,
+                                    @RequestParam(value = "size", required = false) int size) {
+        return sportTrackerService.getTrainingsWithExercises(personId, page, size);
     }
 
 }

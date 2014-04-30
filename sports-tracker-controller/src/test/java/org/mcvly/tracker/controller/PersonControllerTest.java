@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,17 +13,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 import org.junit.Test;
+import org.mcvly.tracker.core.Exercise;
 import org.mcvly.tracker.core.Person;
 import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
 import org.mcvly.tracker.core.TrainingType;
 import org.springframework.http.MediaType;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author mcvly
@@ -117,4 +124,21 @@ public class PersonControllerTest extends AbstractControllerTest {
         ;
     }
 
+    @Test
+    public void testTrainings() throws Exception {
+        when(sportTrackerServiceMock.getTrainingsWithExercises(eq(1), anyInt(), anyInt())).thenReturn(trainingsFromFile());
+
+        mockMvc.perform(get("/person/{id}/trainings?page=1&size=10", 1))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.", hasSize(1)))
+        ;
+    }
+
+    public List<Training> trainingsFromFile() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Training t = mapper.readValue(new File("D:/tmp/trn.json"), Training.class);
+
+        return Arrays.asList(t);
+    }
 }

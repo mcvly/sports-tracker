@@ -29,13 +29,13 @@ public interface SportTrackerService {
 
     List<TrainingSubType> getTrainingSubtypes(Integer typeId);
 
+    List<Activity> getActivities();
+
     void addTraining(Integer personId, Training training) throws STServiceException;
 
     void addTrainingExercise(Long trainingId, Exercise exercise) throws STServiceException;
 
     void addTrainingExercises(Long trainingId, List<Exercise> exercise);
-
-    List<Activity> getActivities();
 
     void addStat(Integer personId, PersonStats stat) throws STServiceException;
 
