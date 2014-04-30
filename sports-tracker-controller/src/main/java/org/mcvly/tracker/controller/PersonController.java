@@ -50,7 +50,7 @@ public class PersonController {
 
     @RequestMapping(value = "{id}/traininfo", method = RequestMethod.GET)
     public List<Training> trainingsInfo(@PathVariable("id") Integer personId,
-                                        @RequestParam("since") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate since) {
+                                        @RequestParam(value = "since", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate since) {
         return sportTrackerService.getTrainingInfos(personId, since);
     }
 
