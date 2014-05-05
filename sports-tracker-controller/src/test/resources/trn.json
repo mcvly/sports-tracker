@@ -1,0 +1,376 @@
+[
+	{
+		"id" : 1,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	},
+	{
+		"id" : 2,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	},
+	{
+		"id" : 3,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	},
+	{
+		"id" : 4,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	},
+	{
+		"id" : 5,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	},
+	{
+		"id" : 6,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	},
+	{
+		"id" : 7,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	},
+	{
+		"id" : 8,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	},
+	{
+		"id" : 9,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	},
+	{
+		"id" : 10,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	},
+	{
+		"id" : 11,
+		"type" : {
+			"code" : "GYM",
+			"name" : "Тренажерка"
+		},
+		"trainingStart" : "2014-04-30T16:50:01.952",
+		"trainingStop" : "2014-04-30T16:50:01.952",
+		"exercises" : [
+			{		
+				"activity" : {
+					"name" : "Жим лежа"
+				},	
+				"exerciseSets" : [
+					{
+						"result" : 65,
+						"reps" : 5	
+					}
+					
+				]	
+			},
+			{		
+				"activity" : {
+					"name" : "Отжимания на брусьях"
+				},
+				"exerciseSets" : [
+					{ "reps" : 12 },
+					{ "reps" : 10 },
+					{ "reps" : 8 }
+				]	
+			}
+				
+		]
+	}
+]

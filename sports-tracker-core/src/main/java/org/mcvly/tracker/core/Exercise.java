@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author mcvly
  * @since 21.03.14
@@ -39,6 +41,7 @@ public class Exercise implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public Training getTraining() {
         return training;
     }

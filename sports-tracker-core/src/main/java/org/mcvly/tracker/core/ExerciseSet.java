@@ -24,7 +24,7 @@ public class ExerciseSet implements Serializable {
     private String note;
 
     public Duration getDuration() {
-        return Duration.parse(duration);
+        return duration != null && !duration.isEmpty() ? Duration.parse(duration) : null;
     }
 
     public void setDuration(String durationString) {

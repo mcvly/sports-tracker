@@ -26,16 +26,23 @@ import org.mcvly.tracker.core.Person;
 import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
 import org.mcvly.tracker.core.TrainingType;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 
 /**
  * @author mcvly
  * @since 24.04.14
  */
 public class PersonControllerTest extends AbstractControllerTest {
+
+    @Value("classpath:trn.json")
+    private Resource trainingsJsonData;
 
     @Test
     public void testPersonInfo() throws Exception {
@@ -126,9 +133,16 @@ public class PersonControllerTest extends AbstractControllerTest {
 
     @Test
     public void testTrainings() throws Exception {
-        when(sportTrackerServiceMock.getTrainingsWithExercises(eq(1), anyInt(), anyInt())).thenReturn(trainingsFromFile());
+        when(sportTrackerServiceMock.getTrainingsWithExercises(eq(1), eq(1), eq(10))).thenReturn(trainingsFromFile().subList(0, 10));
+        when(sportTrackerServiceMock.getTrainingsWithExercises(eq(1), eq(2), eq(10))).thenReturn(trainingsFromFile().subList(10, 11));
 
         mockMvc.perform(get("/person/{id}/trainings?page=1&size=10", 1))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.", hasSize(10)))
+        ;
+
+        mockMvc.perform(get("/person/{id}/trainings?page=2&size=10", 1))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.", hasSize(1)))
@@ -136,9 +150,11 @@ public class PersonControllerTest extends AbstractControllerTest {
     }
 
     public List<Training> trainingsFromFile() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Training t = mapper.readValue(new File("D:/tmp/trn.json"), Training.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JSR310Module());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        Training[] ts = objectMapper.readValue(trainingsJsonData.getFile(), Training[].class);
 
-        return Arrays.asList(t);
+        return Arrays.asList(ts);
     }
 }
