@@ -40,6 +40,9 @@ public class PersonStats implements Serializable {
         this.weight = weight;
     }
 
+    public PersonStats() {
+    }
+
     public Double getWeight() {
         return weight;
     }

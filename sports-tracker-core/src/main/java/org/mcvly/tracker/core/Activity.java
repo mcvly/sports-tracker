@@ -31,6 +31,16 @@ public class Activity implements Serializable {
     @Column(length = 2048)
     private String description;
 
+    public Activity(Integer id, String name, TrainingType type, TrainingSubType subType) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.subType = subType;
+    }
+
+    public Activity() {
+    }
+
     public Integer getId() {
         return id;
     }

@@ -23,6 +23,7 @@
         <h2.version>1.3.175</h2.version>
 
         <jadira-usertype-core.version>3.1.0.GA</jadira-usertype-core.version>
+        <jackson-annotations.version>2.3.0</jackson-annotations.version>
 
         <!-- Test -->
         <junit.version>4.11</junit.version>
@@ -85,6 +86,12 @@
             <artifactId>usertype.core</artifactId>
             <version>${jadira-usertype-core.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson-annotations.version}</version>
+        </dependency>
+
 
         <!-- Test scope dependencies -->
         <dependency>

@@ -49,6 +49,20 @@ public class TrainingType implements Serializable {
         this.name = name;
     }
 
+    public TrainingType(Integer id, String code, String name) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+    }
+
+    public TrainingType(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
+    public TrainingType() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

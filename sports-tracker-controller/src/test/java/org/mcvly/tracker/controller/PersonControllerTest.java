@@ -1,27 +1,10 @@
 package org.mcvly.tracker.controller;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import org.junit.Test;
-import org.mcvly.tracker.core.Exercise;
+import org.mcvly.tracker.core.Activity;
 import org.mcvly.tracker.core.Person;
 import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
@@ -30,10 +13,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * @author mcvly
@@ -102,7 +94,7 @@ public class PersonControllerTest extends AbstractControllerTest {
         when(sportTrackerServiceMock.getTrainingInfos(eq(1), eq(now))).thenReturn(Arrays.asList(t1));
         when(sportTrackerServiceMock.getTrainingInfos(eq(1), eq(null))).thenReturn(Arrays.asList(t1, t2));
 
-        mockMvc.perform(get("/person/{id}/traininfo?since=2014-04-30", 1))
+        mockMvc.perform(get("/person/{id}/traininfo?since=" + now, 1))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.", hasSize(1)))
@@ -149,7 +141,16 @@ public class PersonControllerTest extends AbstractControllerTest {
         ;
     }
 
-    public List<Training> trainingsFromFile() throws IOException {
+    @Test
+    public void testActivities() throws Exception {
+        Activity a1 = new Activity();
+        a1.setName("Плавание");
+        a1.setType(new TrainingType());
+
+        when(sportTrackerServiceMock.getActivities()).thenReturn(Arrays.asList(a1));
+    }
+
+    private List<Training> trainingsFromFile() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JSR310Module());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -157,4 +158,6 @@ public class PersonControllerTest extends AbstractControllerTest {
 
         return Arrays.asList(ts);
     }
+
+
 }

@@ -28,6 +28,15 @@ public class TrainingSubType implements Serializable {
     @Column(nullable = false, length = 64)
     private String name;
 
+    public TrainingSubType() {
+    }
+
+    public TrainingSubType(Integer id, TrainingType type, String name) {
+        this.id = id;
+        this.type = type;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

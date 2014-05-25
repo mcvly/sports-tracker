@@ -53,7 +53,7 @@ public class SportTrackerServiceTest {
     }
 
     @Test
-    public void testReadTrainingSubTypes() {
+    public void testReadTrainingSubTypes() throws STServiceException {
         assertEquals(8, sportTrackerService.getTrainingSubtypes(1).size());
     }
 
@@ -153,7 +153,7 @@ public class SportTrackerServiceTest {
     }
 
     @Test
-    public void testAddActivity() {
+    public void testAddActivity() throws STServiceException {
         List<Activity> activities = sportTrackerService.getActivities();
         assertEquals(40, activities.size());
 

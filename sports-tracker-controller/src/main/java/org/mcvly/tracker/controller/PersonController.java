@@ -1,10 +1,5 @@
 package org.mcvly.tracker.controller;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.mcvly.tracker.core.Person;
 import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
@@ -17,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * @author mcvly

@@ -27,7 +27,7 @@ public interface SportTrackerService {
 
     List<TrainingType> getTrainingTypes();
 
-    List<TrainingSubType> getTrainingSubtypes(Integer typeId);
+    List<TrainingSubType> getTrainingSubtypes(Integer typeId) throws STServiceException;
 
     List<Activity> getActivities();
 

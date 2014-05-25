@@ -90,8 +90,13 @@ public class SportTrackerServiceImpl implements SportTrackerService {
     }
 
     @Override
-    public List<TrainingSubType> getTrainingSubtypes(Integer typeId) {
-        return trainingSubTypeRepository.findAll();
+    public List<TrainingSubType> getTrainingSubtypes(Integer typeId) throws STServiceException {
+        TrainingType t = trainingTypeRepository.findOne(typeId);
+        if (t == null) {
+            throw new STServiceException("Can't find training type with id=" + typeId);
+        } else {
+            return trainingSubTypeRepository.findByType(t);
+        }
     }
 
     @Transactional

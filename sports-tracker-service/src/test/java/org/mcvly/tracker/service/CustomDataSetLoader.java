@@ -25,5 +25,4 @@ public class CustomDataSetLoader extends AbstractDataSetLoader {
                 new FlatXmlDataSetBuilder().build(initDataSet.getInputStream())
         );
     }
-
 }
