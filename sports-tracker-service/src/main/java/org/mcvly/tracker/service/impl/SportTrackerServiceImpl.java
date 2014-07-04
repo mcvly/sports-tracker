@@ -85,6 +85,16 @@ public class SportTrackerServiceImpl implements SportTrackerService {
     }
 
     @Override
+    public Training getTraining(Long trainingId) throws STServiceException {
+        Training training = trainingRepository.findOne(trainingId);
+        if (training == null) {
+            throw new STServiceException("Training with id=" + trainingId + " not found");
+        }
+
+        return training;
+    }
+
+    @Override
     public List<TrainingType> getTrainingTypes() {
         return trainingTypeRepository.findAll();
     }
@@ -101,14 +111,14 @@ public class SportTrackerServiceImpl implements SportTrackerService {
 
     @Transactional
     @Override
-    public void addTraining(Integer personId, Training training) throws STServiceException {
+    public Training addTraining(Integer personId, Training training) throws STServiceException {
         Person trainee = personRepository.findOne(personId);
         if (trainee == null) {
             throw new STServiceException("Person with id=" + personId + " not found");
         }
         trainee.addTraining(training);
         training.setTrainee(trainee);
-        trainingRepository.save(training);
+        return trainingRepository.save(training);
     }
 
     @Transactional
@@ -147,8 +157,8 @@ public class SportTrackerServiceImpl implements SportTrackerService {
     }
 
     @Override
-    public void addActivity(Activity activity) {
-        activityRepository.save(activity);
+    public Activity addActivity(Activity activity) {
+        return activityRepository.save(activity);
     }
 
     @Override

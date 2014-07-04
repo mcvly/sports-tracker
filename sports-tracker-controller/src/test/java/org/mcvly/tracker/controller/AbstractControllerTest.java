@@ -1,6 +1,7 @@
 package org.mcvly.tracker.controller;
 
 import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import org.junit.Before;
@@ -46,6 +47,9 @@ public abstract class AbstractControllerTest {
 
     @Resource
     protected WebApplicationContext webApplicationContext;
+
+    @Resource
+    protected ObjectMapper objectMapper;
 
     @Value("${training.types}")
     private File trainingTypeCsv;

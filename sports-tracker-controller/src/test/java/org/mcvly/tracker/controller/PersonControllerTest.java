@@ -1,23 +1,15 @@
 package org.mcvly.tracker.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import org.junit.Test;
-import org.mcvly.tracker.core.Activity;
 import org.mcvly.tracker.core.Person;
 import org.mcvly.tracker.core.PersonStats;
 import org.mcvly.tracker.core.Training;
-import org.mcvly.tracker.core.TrainingType;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
+import org.mockito.Matchers;
 import org.springframework.http.MediaType;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -25,6 +17,8 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -32,9 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @since 24.04.14
  */
 public class PersonControllerTest extends AbstractControllerTest {
-
-    @Value("classpath:trn.json")
-    private Resource trainingsJsonData;
 
     @Test
     public void testPersonInfo() throws Exception {
@@ -83,81 +74,19 @@ public class PersonControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testTrainingInfo() throws Exception {
-        LocalDate now = LocalDate.now();
+    public void testAddStat() throws Exception {
 
-        TrainingType some = new TrainingType();
+        String json = objectMapper.writeValueAsString(new PersonStats(LocalDateTime.now(), 65.0));
 
-        Training t1 = new Training(some, now.minusDays(2).atTime(13, 13), now.minusDays(2).atTime(15, 13));
-        Training t2 = new Training(some, now.atTime(13, 13), now.atTime(15, 13));
-
-        when(sportTrackerServiceMock.getTrainingInfos(eq(1), eq(now))).thenReturn(Arrays.asList(t1));
-        when(sportTrackerServiceMock.getTrainingInfos(eq(1), eq(null))).thenReturn(Arrays.asList(t1, t2));
-
-        mockMvc.perform(get("/person/{id}/traininfo?since=" + now, 1))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.", hasSize(1)))
-        ;
-
-        mockMvc.perform(get("/person/{id}/traininfo", 1))
+        mockMvc.perform(post("/person/{id}/stats", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+        )
+                .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.", hasSize(2)))
         ;
 
-        mockMvc.perform(get("/person/{id}/traininfo", 2))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.", hasSize(0)))
-        ;
+        verify(sportTrackerServiceMock, times(1)).addStat(eq(1), any(PersonStats.class));
 
-        mockMvc.perform(get("/person/{id}/traininfo?since=abcc", 1))
-                .andExpect(status().isBadRequest())
-        ;
-
-        mockMvc.perform(get("/person/{id}/traininfo?ggg=abcc", 1))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.", hasSize(2)))
-        ;
     }
-
-    @Test
-    public void testTrainings() throws Exception {
-        when(sportTrackerServiceMock.getTrainingsWithExercises(eq(1), eq(1), eq(10))).thenReturn(trainingsFromFile().subList(0, 10));
-        when(sportTrackerServiceMock.getTrainingsWithExercises(eq(1), eq(2), eq(10))).thenReturn(trainingsFromFile().subList(10, 11));
-
-        mockMvc.perform(get("/person/{id}/trainings?page=1&size=10", 1))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.", hasSize(10)))
-        ;
-
-        mockMvc.perform(get("/person/{id}/trainings?page=2&size=10", 1))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.", hasSize(1)))
-        ;
-    }
-
-    @Test
-    public void testActivities() throws Exception {
-        Activity a1 = new Activity();
-        a1.setName("Плавание");
-        a1.setType(new TrainingType());
-
-        when(sportTrackerServiceMock.getActivities()).thenReturn(Arrays.asList(a1));
-    }
-
-    private List<Training> trainingsFromFile() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JSR310Module());
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        Training[] ts = objectMapper.readValue(trainingsJsonData.getFile(), Training[].class);
-
-        return Arrays.asList(ts);
-    }
-
-
 }

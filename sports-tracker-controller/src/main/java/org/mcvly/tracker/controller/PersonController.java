@@ -8,6 +8,7 @@ import org.mcvly.tracker.service.SportTrackerService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,17 +48,13 @@ class PersonController {
         }
     }
 
-    @RequestMapping(value = "{id}/traininfo", method = RequestMethod.GET)
-    public List<Training> trainingsInfo(@PathVariable("id") Integer personId,
-                                        @RequestParam(value = "since", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate since) {
-        return sportTrackerService.getTrainingInfos(personId, since);
+    @RequestMapping(value = "{id}/stats", method = RequestMethod.POST)
+    public void addStat(@PathVariable("id") Integer personId,
+                        @RequestBody PersonStats stats) {
+        try {
+            sportTrackerService.addStat(personId, stats);
+        } catch (STServiceException e) {
+            throw new ResourceNotFoundException();
+        }
     }
-
-    @RequestMapping(value = "{id}/trainings", params = { "page", "size" }, method = RequestMethod.GET)
-    public List<Training> trainings(@PathVariable("id") Integer personId,
-                                    @RequestParam(value = "page", required = false) int page,
-                                    @RequestParam(value = "size", required = false) int size) {
-        return sportTrackerService.getTrainingsWithExercises(personId, page, size);
-    }
-
 }

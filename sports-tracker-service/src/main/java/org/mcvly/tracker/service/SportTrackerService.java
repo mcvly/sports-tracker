@@ -25,13 +25,15 @@ public interface SportTrackerService {
 
     List<Training> getTrainingsWithExercises(Integer personId, Integer page, Integer size);
 
+    Training getTraining(Long trainingId) throws STServiceException;
+
     List<TrainingType> getTrainingTypes();
 
     List<TrainingSubType> getTrainingSubtypes(Integer typeId) throws STServiceException;
 
     List<Activity> getActivities();
 
-    void addTraining(Integer personId, Training training) throws STServiceException;
+    Training addTraining(Integer personId, Training training) throws STServiceException;
 
     void addTrainingExercise(Long trainingId, Exercise exercise) throws STServiceException;
 
@@ -39,7 +41,7 @@ public interface SportTrackerService {
 
     void addStat(Integer personId, PersonStats stat) throws STServiceException;
 
-    void addActivity(Activity activity);
+    Activity addActivity(Activity activity);
 
     void updateActivity(Activity activity) throws STServiceException;
 
